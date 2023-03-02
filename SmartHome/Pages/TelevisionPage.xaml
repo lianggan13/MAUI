@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="SmartHome.Pages.TelevisionPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <VerticalStackLayout>
+        <Button
+            Margin="0,20"
+            Padding="0"
+            Background="#3673ff"
+            FontFamily="IconFont"
+            HeightRequest="35"
+            Text="&#xe781;"
+            WidthRequest="35" />
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="音量-"
+                TextColor="#888" />
+            <Button
+                Grid.Column="1"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="静音"
+                TextColor="#888" />
+            <Button
+                Grid.Column="2"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="音量+"
+                TextColor="#888" />
+            <Button
+                Grid.Row="1"
+                Margin="5"
+                Padding="0"
+                Background="#f7bc20"
+                FontSize="11"
+                Text="返回" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="5"
+                Padding="0"
+                Background="#5b9af7"
+                FontSize="11"
+                Text="主页" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="5"
+                Padding="0"
+                Background="#46cb92"
+                FontSize="11"
+                Text="菜单" />
+        </Grid>
+
+        <Grid
+            Margin="20"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Ellipse
+                Fill="#F7F9FA"
+                HeightRequest="180"
+                WidthRequest="180" />
+            <Ellipse
+                Fill="#FFF"
+                HeightRequest="110"
+                WidthRequest="110" />
+            <Button
+                Margin="10"
+                Padding="0"
+                Background="Transparent"
+                FontFamily="IconFont"
+                FontSize="14"
+                HorizontalOptions="Center"
+                Text="&#xe600;"
+                TextColor="#888"
+                VerticalOptions="Start" />
+            <Button
+                Margin="10"
+                Padding="0"
+                Background="Transparent"
+                FontFamily="IconFont"
+                FontSize="14"
+                HorizontalOptions="Start"
+                Text="&#xe602;"
+                TextColor="#888"
+                VerticalOptions="Center" />
+            <Button
+                Margin="10"
+                Padding="0"
+                Background="Transparent"
+                FontFamily="IconFont"
+                FontSize="14"
+                HorizontalOptions="Center"
+                Text="&#xe601;"
+                TextColor="#888"
+                VerticalOptions="End" />
+            <Button
+                Margin="10"
+                Padding="0"
+                Background="Transparent"
+                FontFamily="IconFont"
+                FontSize="14"
+                HorizontalOptions="End"
+                Text="&#xe626;"
+                TextColor="#888"
+                VerticalOptions="Center" />
+            <Button
+                Background="#5b9af7"
+                CornerRadius="40"
+                HeightRequest="50"
+                Text="OK"
+                WidthRequest="50" />
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="45" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="1"
+                TextColor="#888" />
+            <Button
+                Grid.Column="1"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="2"
+                TextColor="#888" />
+            <Button
+                Grid.Column="2"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="3"
+                TextColor="#888" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="4"
+                TextColor="#888" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="5"
+                TextColor="#888" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="6"
+                TextColor="#888" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="7"
+                TextColor="#888" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="8"
+                TextColor="#888" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="9"
+                TextColor="#888" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="0"
+                TextColor="#888" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="1"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="0"
+                TextColor="#888" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="2"
+                Margin="5"
+                Padding="0"
+                Background="#F7F9FA"
+                FontSize="11"
+                Text="0"
+                TextColor="#888" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentView>

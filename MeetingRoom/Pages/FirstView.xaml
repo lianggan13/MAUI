@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MeetingRoom.Pages.FirstView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.Resources>
+        <Style x:Key="DeviceButtonStyle" TargetType="RadioButton">
+            <Setter Property="WidthRequest" Value="60" />
+            <Setter Property="HeightRequest" Value="24" />
+            <Setter Property="Background" Value="#02FFFFFF" />
+            <Setter Property="TextColor" Value="#999" />
+            <Setter Property="ControlTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Rectangle Fill="{TemplateBinding Background}" RadiusX="8" />
+                            <Label
+                                FontSize="10"
+                                HorizontalOptions="Center"
+                                Text="{TemplateBinding Content}"
+                                TextColor="{TemplateBinding TextColor}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#99FFFFFF" />
+                    <Setter Property="TextColor" Value="#409EFE" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ModeButtonStyle" TargetType="RadioButton">
+            <Setter Property="Background" Value="#05FFFFFF" />
+            <Setter Property="BorderColor" Value="#999" />
+            <Setter Property="TextColor" Value="#888" />
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="ControlTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Ellipse
+                                Fill="{TemplateBinding Background}"
+                                HeightRequest="24"
+                                HorizontalOptions="Center"
+                                Stroke="{TemplateBinding BorderColor}"
+                                VerticalOptions="Center"
+                                WidthRequest="24" />
+                            <Label
+                                FontFamily="IconFont"
+                                FontSize="10"
+                                HorizontalOptions="Center"
+                                Text="{TemplateBinding Value}"
+                                TextColor="{TemplateBinding TextColor}"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Margin="5,0"
+                                FontSize="10"
+                                Text="{TemplateBinding Content}"
+                                TextColor="{TemplateBinding BorderColor}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                    <Setter Property="BorderColor" Value="#409EFE" />
+                    <Setter Property="Background" Value="#409EFE" />
+                    <Setter Property="TextColor" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ContentView.Resources>
+    <Grid>
+        <Rectangle
+            Fill="#ECF2F7"
+            RadiusX="25"
+            RadiusY="25" />
+
+        <Grid Margin="30,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="31" />
+                <RowDefinition />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="120" />
+            </Grid.RowDefinitions>
+
+            <!--  第一行  空调切换  -->
+            <Grid HorizontalOptions="End">
+                <Rectangle
+                    Fill="#11000000"
+                    HeightRequest="28"
+                    RadiusX="10"
+                    WidthRequest="304" />
+                <Grid HorizontalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <RadioButton
+                        Content="全部"
+                        IsChecked="True"
+                        Style="{StaticResource DeviceButtonStyle}" />
+                    <RadioButton
+                        Grid.Column="1"
+                        Content="空调一"
+                        Style="{StaticResource DeviceButtonStyle}" />
+                    <RadioButton
+                        Grid.Column="2"
+                        Content="空调二"
+                        Style="{StaticResource DeviceButtonStyle}" />
+                    <RadioButton
+                        Grid.Column="3"
+                        Content="空调三"
+                        Style="{StaticResource DeviceButtonStyle}" />
+                    <RadioButton
+                        Grid.Column="4"
+                        Content="空调四"
+                        Style="{StaticResource DeviceButtonStyle}" />
+                </Grid>
+            </Grid>
+
+            <!--  第二行  -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label
+                        FontSize="13"
+                        Text="空调"
+                        TextColor="#888"
+                        VerticalOptions="Center" />
+                    <Switch
+                        IsToggled="{Binding State}"
+                        OnColor="White"
+                        ThumbColor="#409EFE" />
+                </HorizontalStackLayout>
+
+                <Ellipse
+                    Grid.Column="1"
+                    HeightRequest="173"
+                    Stroke="#11000000"
+                    StrokeThickness="6"
+                    WidthRequest="173" />
+                <Ellipse
+                    Grid.Column="1"
+                    HeightRequest="170"
+                    Stroke="#409EFE"
+                    StrokeThickness="3"
+                    WidthRequest="170" />
+                <VerticalStackLayout
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <HorizontalStackLayout Margin="0,10">
+                        <Button
+                            Margin="0,0,10,0"
+                            Padding="0"
+                            Background="white"
+                            CornerRadius="15"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HeightRequest="30"
+                            Text="＋"
+                            TextColor="#409EFE"
+                            VerticalOptions="Center"
+                            WidthRequest="30" />
+                        <Label
+                            FontSize="40"
+                            Text="24"
+                            TextColor="#555"
+                            VerticalOptions="Center" />
+                        <Label
+                            Margin="5,0,0,20"
+                            Text="℃"
+                            TextColor="#999"
+                            VerticalOptions="Center" />
+                        <Button
+                            Margin="10,0,0,0"
+                            Padding="0"
+                            Background="white"
+                            CornerRadius="15"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HeightRequest="30"
+                            Text="－"
+                            TextColor="#409EFE"
+                            VerticalOptions="Center"
+                            WidthRequest="30" />
+                    </HorizontalStackLayout>
+                    <Label
+                        FontSize="12"
+                        HorizontalOptions="Center"
+                        Text="设置温度"
+                        TextColor="#888" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="2" VerticalOptions="Center">
+                    <Label
+                        Margin="5,10"
+                        FontAttributes="Bold"
+                        FontSize="10"
+                        Text="模式"
+                        TextColor="#888" />
+                    <HorizontalStackLayout>
+                        <RadioButton
+                            Content="自动"
+                            IsChecked="True"
+                            Style="{StaticResource ModeButtonStyle}"
+                            Value="A" />
+                        <RadioButton
+                            Content="制冷"
+                            Style="{StaticResource ModeButtonStyle}"
+                            Value="&#xe64b;" />
+                        <RadioButton
+                            Content="制热"
+                            Style="{StaticResource ModeButtonStyle}"
+                            Value="&#xeb66;" />
+                        <RadioButton
+                            Content="送风"
+                            Style="{StaticResource ModeButtonStyle}"
+                            Value="&#xe639;" />
+                    </HorizontalStackLayout>
+                    <Label
+                        Margin="5,25,0,10"
+                        FontAttributes="Bold"
+                        FontSize="10"
+                        Text="风速"
+                        TextColor="#888" />
+                    <HorizontalStackLayout>
+                        <RadioButton
+                            Content="自动"
+                            Style="{StaticResource ModeButtonStyle}"
+                            Value="A" />
+                        <RadioButton
+                            Content="低速"
+                            Style="{StaticResource ModeButtonStyle}"
+                            Value="低" />
+                        <RadioButton
+                            Content="中速"
+                            IsChecked="True"
+                            Style="{StaticResource ModeButtonStyle}"
+                            Value="中" />
+                        <RadioButton
+                            Content="高速"
+                            Style="{StaticResource ModeButtonStyle}"
+                            Value="高" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+            </Grid>
+
+            <!--  第三行  -->
+            <HorizontalStackLayout
+                Grid.Row="2"
+                HorizontalOptions="Start"
+                VerticalOptions="Center">
+                <Label
+                    Margin="0,0,0,3"
+                    FontSize="13"
+                    Text="AQI:"
+                    TextColor="#999"
+                    VerticalOptions="End" />
+                <Label
+                    Margin="5,0"
+                    FontSize="21"
+                    Text="36"
+                    TextColor="#666"
+                    VerticalOptions="Center" />
+                <Label
+                    Margin="0,0,0,3"
+                    FontSize="13"
+                    Text="优"
+                    TextColor="ForestGreen"
+                    VerticalOptions="End" />
+            </HorizontalStackLayout>
+            <Label
+                Grid.Row="2"
+                FontSize="10"
+                HorizontalOptions="End"
+                Text="数据更新于1分钟前"
+                TextColor="#CCC"
+                VerticalOptions="Center" />
+            <!--  第四行  -->
+            <CollectionView Grid.Row="3" ItemsSource="{Binding MonitorList}">
+                <!--  子项而已方式  -->
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="8"
+                        Orientation="Vertical"
+                        Span="3"
+                        VerticalItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <!--  数据模板  数据子项安排一个外衣  -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            Padding="5,8"
+                            Background="#8FFF"
+                            BorderColor="Transparent">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Rectangle
+                                    Margin="15,0,10,0"
+                                    HeightRequest="34"
+                                    RadiusX="17"
+                                    Stroke="#BBB"
+                                    WidthRequest="34" />
+                                <Label
+                                    FontFamily="IconFont"
+                                    FontSize="18"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Icon}"
+                                    TextColor="#999"
+                                    VerticalOptions="Center" />
+
+                                <Label
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    FontSize="11"
+                                    Text="{Binding Header}"
+                                    TextColor="#CCC"
+                                    VerticalOptions="Center" />
+
+                                <VerticalStackLayout Grid.Column="2" VerticalOptions="Center">
+                                    <HorizontalStackLayout Margin="0,0,10,5" HorizontalOptions="End">
+                                        <Label
+                                            Margin="0,0,5,0"
+                                            FontAttributes="Bold"
+                                            FontSize="14"
+                                            Text="{Binding Value}"
+                                            TextColor="#777" />
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="10"
+                                            Text="{Binding Unit}"
+                                            TextColor="#AAA"
+                                            VerticalOptions="End" />
+                                    </HorizontalStackLayout>
+                                    <Label
+                                        Margin="10,0"
+                                        FontSize="9"
+                                        HorizontalOptions="End"
+                                        Text="{Binding State}"
+                                        TextColor="ForestGreen" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+</ContentView>

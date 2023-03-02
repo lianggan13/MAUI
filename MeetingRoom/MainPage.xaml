@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MeetingRoom.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:p="clr-namespace:MeetingRoom.Pages"
+    xmlns:vm="clr-namespace:MeetingRoom.ViewModels"
+    x:Name="cp">
+    <ContentPage.BindingContext>
+        <vm:MainViewModel x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="RadioButton">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="#395FA7" />
+                        <GradientStop Offset="0.9" Color="#254396" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextColor" Value="#A4D5F9" />
+            <Setter Property="WidthRequest" Value="140" />
+            <Setter Property="ControlTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid HorizontalOptions="Fill">
+                            <Rectangle
+                                x:Name="rect"
+                                Background="{TemplateBinding Background}"
+                                HorizontalOptions="StartAndExpand" />
+                            <Label
+                                Background="#409EFE"
+                                HorizontalOptions="Start"
+                                IsVisible="{TemplateBinding IsChecked}"
+                                WidthRequest="3" />
+                            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <!--  164,213,249  -->
+                                <Label
+                                    Margin="0,5"
+                                    FontFamily="IconFont"
+                                    FontSize="26"
+                                    HorizontalOptions="Center"
+                                    Text="{TemplateBinding Value}"
+                                    TextColor="{TemplateBinding TextColor}" />
+                                <Label
+                                    FontSize="11"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{TemplateBinding Content}"
+                                    TextColor="{TemplateBinding TextColor}" />
+                            </StackLayout>
+                            <Label
+                                Padding="0"
+                                HeightRequest="1"
+                                VerticalOptions="End">
+                                <Label.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Offset="0" Color="Transparent" />
+                                        <GradientStop Offset="0.5" Color="White" />
+                                        <GradientStop Offset="1" Color="Transparent" />
+                                    </LinearGradientBrush>
+                                </Label.Background>
+                            </Label>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#254396" />
+                    <Setter Property="TextColor" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ContentPage.Resources>
+    <!--  MVVM设计模式  -->
+    <Grid Background="#DDEAFA">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Ellipse
+            Margin="-100,0,0,0"
+            Fill="#254396"
+            HeightRequest="800"
+            WidthRequest="300" />
+        <CollectionView Margin="0,0,0,-1" ItemsSource="{Binding Menus}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Horizontal" Span="6" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton
+                        Content="{Binding MenuHeader}"
+                        GroupName="menu"
+                        IsChecked="{Binding IsSelected}"
+                        Style="{StaticResource MenuButtonStyle}"
+                        Value="{Binding MenuIcon}">
+                        <RadioButton.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.ShowPageCommand, Source={x:Reference cp}}" CommandParameter="{Binding}" />
+                        </RadioButton.GestureRecognizers>
+                    </RadioButton>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout
+            Grid.Column="1"
+            Margin="50,20,0,0"
+            HorizontalOptions="Start"
+            VerticalOptions="Start">
+            <Label
+                FontAttributes="Bold"
+                FontFamily="IconFont"
+                FontSize="16"
+                Text="&#xe600;"
+                TextColor="#44000000"
+                VerticalOptions="Center" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="14"
+                Text=" 6F多功能厅"
+                TextColor="#44000000"
+                VerticalOptions="Center" />
+            <Label
+                Margin="10,0"
+                FontSize="10"
+                Text="[切换]"
+                TextColor="#409EFE"
+                VerticalOptions="Center" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout
+            Grid.Column="1"
+            Margin="0,20,20,0"
+            HorizontalOptions="End"
+            VerticalOptions="Start">
+            <Label
+                FontAttributes="Bold"
+                FontSize="11"
+                Text="朝夕智控 | 移动应用技术展示案例   "
+                TextColor="#19000000"
+                VerticalOptions="Center" />
+            <Image
+                Opacity="0.5"
+                Source="logo"
+                WidthRequest="25" />
+        </HorizontalStackLayout>
+
+        <Frame
+            Grid.Column="1"
+            Margin="50,50,20,10"
+            Padding="0"
+            Background="Transparent"
+            BorderColor="Transparent"
+            Content="{Binding ViewContent}"
+            CornerRadius="0"
+            HasShadow="False" />
+
+        <!--<Grid Grid.Column="1" Margin="50,50,20,10">
+            <p:FirstView IsVisible="{Binding Menus[0].IsSelected}" />
+            <p:MeetingView IsVisible="{Binding Menus[1].IsSelected}" />
+            <p:ProjectionView IsVisible="{Binding Menus[2].IsSelected}" />
+            <p:RestView IsVisible="{Binding Menus[3].IsSelected}" />
+            <p:ExitView IsVisible="{Binding Menus[4].IsSelected}" />
+            <p:DetailView IsVisible="{Binding Menus[5].IsSelected}" />
+        </Grid>-->
+    </Grid>
+</ContentPage>

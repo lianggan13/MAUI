@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartHome.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ap="clr-namespace:SmartHome.AttachedProperties"
+    xmlns:pages="clr-namespace:SmartHome.Pages"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:SmartHome.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:MainViewModel x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="NavButtonStyle" TargetType="RadioButton">
+            <Setter Property="WidthRequest" Value="70" />
+            <Setter Property="HeightRequest" Value="90" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="Margin" Value="5,10" />
+            <Setter Property="FontSize" Value="40" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="ControlTemplate">
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="30" />
+                        </Grid.RowDefinitions>
+                        <Rectangle
+                            Fill="White"
+                            HeightRequest="50"
+                            IsVisible="{TemplateBinding IsChecked}"
+                            RadiusX="20"
+                            RadiusY="20"
+                            Stroke="#8de9ff"
+                            StrokeThickness="1"
+                            WidthRequest="50" />
+                        <Ellipse
+                            Margin="0,0,0,5"
+                            Fill="#ffb53d"
+                            HeightRequest="8"
+                            IsVisible="{TemplateBinding IsChecked}"
+                            VerticalOptions="End"
+                            WidthRequest="20" />
+                        <Rectangle
+                            HeightRequest="50"
+                            IsVisible="{TemplateBinding IsChecked}"
+                            RadiusX="20"
+                            RadiusY="20"
+                            Stroke="#8de9ff"
+                            StrokeThickness="1"
+                            WidthRequest="50" />
+                        <Label
+                            FontFamily="IconFont"
+                            FontSize="30"
+                            HorizontalOptions="Center"
+                            Text="{TemplateBinding Value}"
+                            TextColor="{TemplateBinding TextColor}"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Grid.Row="1"
+                            FontSize="13"
+                            HorizontalOptions="Center"
+                            Text="{TemplateBinding Content}"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+            <Style.Triggers>
+                <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                    <Setter Property="RadioButton.TextColor" Value="#3673ff" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ContentPage.Resources>
+    <Grid Padding="0,30,0,0">
+        <Grid.Background>
+            <LinearGradientBrush>
+                <!--  53,116,255  -->
+                <GradientStop Offset="0" Color="#3673ff" />
+                <GradientStop Offset="1" Color="#f6f6f6" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="120" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Margin="0">
+            <Label
+                FontFamily="IconFont"
+                FontSize="14"
+                Text="&#xe605;"
+                TextColor="White"
+                VerticalOptions="Center" />
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="一楼客厅" TextColor="White" />
+                <Label
+                    Margin="5,0"
+                    FontFamily="IconFont"
+                    FontSize="10"
+                    Text="&#xe601;"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </Grid>
+
+        <ScrollView
+            Grid.Row="1"
+            HorizontalOptions="Fill"
+            HorizontalScrollBarVisibility="Never"
+            Orientation="Horizontal">
+            <HorizontalStackLayout>
+                <RadioButton
+                    ap:ButtonPageType.PageType="{x:Type pages:LightPage}"
+                    CheckedChanged="RadioButton_CheckedChanged"
+                    Content="灯光"
+                    IsChecked="True"
+                    Style="{StaticResource NavButtonStyle}"
+                    Value="&#xe60f;" />
+                <RadioButton
+                    ap:ButtonPageType.PageType="{x:Type pages:CurtainPage}"
+                    CheckedChanged="RadioButton_CheckedChanged"
+                    Content="窗帘"
+                    Style="{StaticResource NavButtonStyle}"
+                    Value="&#xe617;" />
+                <RadioButton
+                    ap:ButtonPageType.PageType="{x:Type pages:AirPage}"
+                    CheckedChanged="RadioButton_CheckedChanged"
+                    Content="空调"
+                    Style="{StaticResource NavButtonStyle}"
+                    Value="&#xe613;" />
+                <RadioButton
+                    ap:ButtonPageType.PageType="{x:Type pages:FanPage}"
+                    CheckedChanged="RadioButton_CheckedChanged"
+                    Content="电扇"
+                    Style="{StaticResource NavButtonStyle}"
+                    Value="&#xe604;" />
+                <RadioButton
+                    ap:ButtonPageType.PageType="{x:Type pages:TelevisionPage}"
+                    CheckedChanged="RadioButton_CheckedChanged"
+                    Content="电视"
+                    Style="{StaticResource NavButtonStyle}"
+                    Value="&#xe60d;" />
+                <RadioButton
+                    ap:ButtonPageType.PageType="{x:Type pages:MusicPage}"
+                    CheckedChanged="RadioButton_CheckedChanged"
+                    Content="背景音乐"
+                    Style="{StaticResource NavButtonStyle}"
+                    Value="&#xe620;" />
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <ScrollView Grid.Row="2" VerticalScrollBarVisibility="Default">
+            <Frame
+                x:Name="mainFrame"
+                Margin="10,10,10,60"
+                BackgroundColor="White"
+                BorderColor="Transparent"
+                CornerRadius="25">
+                <pages:LightPage />
+            </Frame>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

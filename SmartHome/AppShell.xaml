@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SmartHome.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SmartHome"
+    Shell.FlyoutBehavior="Disabled">
+    <!--<Shell.Background>
+        <LinearGradientBrush>
+            <GradientStop Offset="0" Color="Blue" />
+            <GradientStop Offset="1" Color="LightGray" />
+        </LinearGradientBrush>
+    </Shell.Background>-->
+
+
+    <TabBar>
+        <Tab>
+            <!--<ShellContent x:Name="AAA" Title="AAA" />-->
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+        </Tab>
+    </TabBar>
+
+
+
+</Shell>

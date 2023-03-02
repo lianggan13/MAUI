@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="OnlineLesson.Views.HomeView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:OnlineLesson.ViewModels">
+    <ContentView.BindingContext>
+        <vm:HomeViewModel x:Name="vm" />
+    </ContentView.BindingContext>
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130" />
+                <RowDefinition Height="23" />
+                <RowDefinition Height="23" />
+                <RowDefinition Height="100" />
+                <RowDefinition />
+                <RowDefinition Height="200" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.RowSpan="2"
+                Margin="0"
+                Background="#4f51c0" />
+
+            <!--  头  -->
+            <Grid
+                Grid.RowSpan="2"
+                Margin="15,0"
+                VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="Start"
+                    Text="晚上好, 朝小夕!"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Row="1"
+                    FontSize="13"
+                    Text="博学不穷，笃行不倦！今天你想学点什么?"
+                    TextColor="#99FFFFFF" />
+
+                <Label
+                    Grid.Column="1"
+                    FontFamily="IconFont"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    Text="&#xe8be;"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <!--  搜索  -->
+            <Grid
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Margin="15,0">
+                <Frame
+                    Margin="0,1"
+                    BorderColor="#DDD"
+                    CornerRadius="10" />
+                <!--  TextBox  -->
+                <Entry
+                    Margin="30,1,10,1"
+                    BackgroundColor="Transparent"
+                    Placeholder="搜索你喜欢的课程"
+                    VerticalOptions="Center" />
+
+                <Label
+                    Margin="10,0"
+                    FontFamily="IconFont"
+                    FontSize="14"
+                    HorizontalOptions="Start"
+                    Text="&#xe601;"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <!--  旋转木马  -->
+            <CarouselView
+                Grid.Row="3"
+                Margin="0"
+                ItemsSource="{Binding CarouselItems}"
+                PeekAreaInsets="5">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Frame
+                                Margin="10,0"
+                                Padding="0"
+                                BackgroundColor="#4f51c0"
+                                BorderColor="Transparent"
+                                CornerRadius="5"
+                                HeightRequest="80">
+                                <VerticalStackLayout Margin="10,0,50,0" VerticalOptions="Center">
+                                    <Label
+                                        Margin="0,5"
+                                        FontAttributes="Bold"
+                                        FontSize="12"
+                                        HorizontalOptions="Start"
+                                        Text="{Binding Title}"
+                                        TextColor="White"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontSize="10"
+                                        HorizontalOptions="Start"
+                                        Text="{Binding Description}"
+                                        TextColor="#99FFFFFF" />
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Ellipse
+                                Margin="0,0,-20,-15"
+                                HeightRequest="70"
+                                HorizontalOptions="End"
+                                Stroke="#66FFFFFF"
+                                StrokeThickness="8"
+                                VerticalOptions="End"
+                                WidthRequest="70" />
+                            <Ellipse
+                                Margin="0,-20,-20,0"
+                                HeightRequest="60"
+                                HorizontalOptions="End"
+                                Stroke="#33FFFFFF"
+                                StrokeThickness="8"
+                                VerticalOptions="Start"
+                                WidthRequest="60" />
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <!--  正在直播  -->
+            <Grid Grid.Row="4" Margin="15,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Text="正在直播" VerticalOptions="Center" />
+
+                <ScrollView
+                    Grid.Row="1"
+                    HorizontalScrollBarVisibility="Never"
+                    Orientation="Horizontal">
+                    <!--  附加属性  -->
+                    <!--  CollectionView   ListView  -->
+                    <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Teachers}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HeightRequest="75" WidthRequest="60">
+                                    <Frame
+                                        BorderColor="PaleVioletRed"
+                                        CornerRadius="25"
+                                        HeightRequest="50"
+                                        WidthRequest="50">
+                                        <Frame
+                                            Margin="2"
+                                            Padding="0"
+                                            BackgroundColor="White"
+                                            BorderColor="Transparent"
+                                            CornerRadius="25"
+                                            HeightRequest="50"
+                                            WidthRequest="50">
+                                            <Image Source="{Binding Avatar}" />
+                                        </Frame>
+                                    </Frame>
+                                    <Label
+                                        Background="PaleVioletRed"
+                                        FontSize="10"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding Name}"
+                                        TextColor="White"
+                                        VerticalOptions="End"
+                                        WidthRequest="40" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </HorizontalStackLayout>
+                </ScrollView>
+            </Grid>
+
+            <!--  课程分类  -->
+            <Grid Grid.Row="5" Margin="15,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Text="课程分类" VerticalOptions="Center" />
+
+                <!--  FlexLayout  -->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame
+                            Padding="12"
+                            Background="#4f51c0"
+                            HeightRequest="53"
+                            HorizontalOptions="Center"
+                            WidthRequest="55">
+                            <Image Source="Images/dotnet_bot.svg" />
+                        </Frame>
+                        <Label HorizontalOptions="Center" Text=".NET" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+
+            <!--  课程推荐  -->
+            <Grid Grid.Row="6" Margin="15,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Text="课程推荐" VerticalOptions="Center" />
+
+                <CollectionView Grid.Row="1" ItemsSource="{Binding Courses}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HeightRequest="70">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Frame
+                                    Padding="0"
+                                    HeightRequest="50"
+                                    WidthRequest="50">
+                                    <Image
+                                        HeightRequest="50"
+                                        Source="{Binding Cover}"
+                                        WidthRequest="50" />
+                                </Frame>
+
+                                <VerticalStackLayout Grid.Column="1">
+                                    <Label
+                                        Margin="10,0"
+                                        Text="{Binding Classify}"
+                                        TextColor="#888" />
+                                    <Label Margin="0,3" Text="{Binding Name}" />
+                                    <Grid Margin="10,0">
+                                        <HorizontalStackLayout>
+                                            <Label FontSize="10" Text="{Binding StudyCount}" />
+                                            <Label
+                                                FontSize="10"
+                                                Text="人正在学习"
+                                                TextColor="#888" />
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout HorizontalOptions="End">
+                                            <Label FontSize="10" Text="{Binding Favorite}" />
+                                            <Label
+                                                FontSize="10"
+                                                Text="收藏"
+                                                TextColor="#888" />
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentView>

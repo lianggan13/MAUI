@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OnlineLesson.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:OnlineLesson.ViewModels"
+    Loaded="ContentPage_Loaded"
+    Shell.NavBarIsVisible="False">
+    <ContentPage.BindingContext>
+        <vm:MainViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="RadioButton">
+            <Setter Property="TextColor" Value="#DDD" />
+            <Setter Property="ControlTemplate">
+                <Setter.Value>
+                    <!--  RadioButton.ControlTemplate = new ControlTemplate()  -->
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                FontFamily="IconFont"
+                                FontSize="24"
+                                HorizontalOptions="Center"
+                                Text="{TemplateBinding Value}"
+                                TextColor="{TemplateBinding TextColor}"
+                                VerticalOptions="Center" />
+
+                            <Label
+                                Grid.Row="1"
+                                Margin="0,3"
+                                FontSize="12"
+                                HorizontalOptions="Center"
+                                Text="{TemplateBinding Content}"
+                                TextColor="{TemplateBinding TextColor}"
+                                VerticalOptions="Center" />
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!--  WPF  Style.Trigger与ControlTemplate.Triggers   区别？  -->
+            <Style.Triggers>
+                <!--    -->
+                <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                    <Setter Property="TextColor" Value="Orange" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+
+        <Frame
+            x:Name="content"
+            Padding="0"
+            BorderColor="Transparent"
+            Content="{Binding Page}"
+            CornerRadius="0" />
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <RadioButton
+                BindingContext="HomeView"
+                CheckedChanged="RadioButton_CheckedChanged"
+                Content="首页"
+                IsChecked="True"
+                Value="&#xe62e;" />
+            <RadioButton
+                Grid.Column="1"
+                BindingContext="ClassifyView"
+                CheckedChanged="RadioButton_CheckedChanged"
+                Content="分类"
+                Value="&#xe611;" />
+            <RadioButton
+                Grid.Column="2"
+                CheckedChanged="RadioButton_CheckedChanged"
+                Content="发现"
+                Value="&#xe746;" />
+            <RadioButton
+                Grid.Column="3"
+                CheckedChanged="RadioButton_CheckedChanged"
+                Content="课程"
+                Value="&#xe600;" />
+            <RadioButton
+                Grid.Column="4"
+                CheckedChanged="RadioButton_CheckedChanged"
+                Content="我的"
+                Value="&#xe649;" />
+        </Grid>
+    </Grid>
+
+</ContentPage>

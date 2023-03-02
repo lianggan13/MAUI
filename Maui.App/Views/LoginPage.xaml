@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Maui.App.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="LoginPage"
+    Shell.NavBarIsVisible="False">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="0" Color="#1a32c3" />
+                <GradientStop Offset="0.9" Color="#7a36d6" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <!--  StackLayout  Xamarin.Forms  -->
+        <VerticalStackLayout VerticalOptions="Center">
+            <Frame
+                Margin="0,-100,0,20"
+                Padding="0"
+                BorderColor="White"
+                CornerRadius="40"
+                HeightRequest="76"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="80">
+                <Image
+                    Aspect="AspectFit"
+                    BackgroundColor="Transparent"
+                    Source="logo.png" />
+            </Frame>
+            <Label
+                Margin="0,0,0,80"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="朝夕MES"
+                TextColor="White"
+                VerticalOptions="Center" />
+
+            <Frame
+                Margin="20,10"
+                Padding="20,2"
+                BackgroundColor="#22000000"
+                BorderColor="Transparent"
+                CornerRadius="25">
+                <Entry
+                    FontFamily="OpenSansRegular"
+                    FontSize="14"
+                    x:Name="txtUserName"
+                    Placeholder="请输入工号/手机号/邮箱地址"
+                    TextColor="White"
+                    VerticalTextAlignment="Center" />
+            </Frame>
+            <Frame
+                Margin="20,0"
+                Padding="20,2"
+                BackgroundColor="#22000000"
+                BorderColor="Transparent"
+                CornerRadius="25">
+                <Entry
+                    IsPassword="True"
+                    x:Name="txtPwd"
+                    Placeholder="请输入密码"
+                    VerticalTextAlignment="Center" />
+            </Frame>
+            <Button
+                Margin="20,60,20,0"
+                Background="orange"
+                Clicked="Button_Clicked"
+                CornerRadius="20"
+                HeightRequest="40"
+                Text="Login" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="SmartHome.Pages.LightPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:selector="clr-namespace:SmartHome.Selectors"
+    xmlns:vm="clr-namespace:SmartHome.ViewModels">
+    <ContentView.BindingContext>
+        <vm:LightViewModel x:Name="vm" />
+    </ContentView.BindingContext>
+    <ContentView.Resources>
+        <DataTemplate x:Key="DT1">
+            <Grid Margin="0,15,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label
+                    HorizontalOptions="Start"
+                    Text="{Binding Header}"
+                    VerticalOptions="Center" />
+                <Switch
+                    HorizontalOptions="End"
+                    IsToggled="{Binding IsOpen}"
+                    OnColor="#3673ff"
+                    ThumbColor="#DDD"
+                    VerticalOptions="Center" />
+
+                <Grid Grid.Row="1" HeightRequest="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        FontFamily="IconFont"
+                        HorizontalOptions="Center"
+                        Text="&#xe634;"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="2"
+                        FontFamily="IconFont"
+                        HorizontalOptions="Center"
+                        Text="&#xe634;"
+                        VerticalOptions="Center" />
+                    <Slider
+                        Grid.Column="1"
+                        Maximum="1"
+                        Minimum="0"
+                        MinimumTrackColor="Orange"
+                        ThumbColor="#DDD"
+                        VerticalOptions="Center"
+                        Value="{Binding Value1}" />
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="DT2">
+            <Grid Margin="0,15,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label
+                    HorizontalOptions="Start"
+                    Text="{Binding Header}"
+                    VerticalOptions="Center" />
+
+                <Button
+                    Margin="0,10"
+                    Padding="0"
+                    BorderWidth="0"
+                    Command="{Binding EditCommand}"
+                    CornerRadius="14"
+                    FontFamily="IconFont"
+                    FontSize="12"
+                    HeightRequest="28"
+                    HorizontalOptions="End"
+                    StyleClass="test"
+                    Text="&#xeabd;  编辑"
+                    VerticalOptions="Center"
+                    WidthRequest="65">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Offset="0" Color="#62c8f9" />
+                            <GradientStop Offset="1" Color="#4477f7" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+
+
+
+                <Grid Grid.Row="1" HeightRequest="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        FontFamily="IconFont"
+                        HorizontalOptions="Center"
+                        Text="&#xe634;"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="2"
+                        FontFamily="IconFont"
+                        HorizontalOptions="Center"
+                        Text="&#xe634;"
+                        VerticalOptions="Center" />
+                    <Slider
+                        Grid.Column="1"
+                        Maximum="1"
+                        Minimum="0"
+                        MinimumTrackColor="Orange"
+                        ThumbColor="#DDD"
+                        VerticalOptions="Center"
+                        Value="{Binding Value1}" />
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="DT3">
+            <Grid Margin="0,15,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label
+                    Margin="0,10"
+                    HorizontalOptions="Start"
+                    Text="{Binding Header}"
+                    VerticalOptions="Center" />
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        FontFamily="IconFont"
+                        HorizontalOptions="Center"
+                        Text="冷"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="2"
+                        FontFamily="IconFont"
+                        HorizontalOptions="Center"
+                        Text="暖"
+                        VerticalOptions="Center" />
+                    <Slider
+                        Grid.Column="1"
+                        Maximum="1"
+                        Minimum="0"
+                        MinimumTrackColor="Orange"
+                        ThumbColor="#DDD"
+                        VerticalOptions="Center"
+                        Value="{Binding Value1}" />
+
+                    <Label
+                        Grid.Row="1"
+                        FontFamily="IconFont"
+                        HorizontalOptions="Center"
+                        Text="&#xe634;"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        FontFamily="IconFont"
+                        HorizontalOptions="Center"
+                        Text="&#xe634;"
+                        VerticalOptions="Center" />
+                    <Slider
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Maximum="1"
+                        Minimum="0"
+                        MinimumTrackColor="Orange"
+                        ThumbColor="#DDD"
+                        VerticalOptions="Center"
+                        Value="{Binding Value2}" />
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </ContentView.Resources>
+    <CollectionView ItemsSource="{Binding LightControls}">
+        <CollectionView.ItemTemplate>
+            <selector:LightItemTemplateSelector
+                DT1="{StaticResource DT1}"
+                DT2="{StaticResource DT2}"
+                DT3="{StaticResource DT3}" />
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>

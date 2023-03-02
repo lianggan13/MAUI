@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MeetingRoom.Pages.ExitView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <Image
+            HeightRequest="150"
+            Source="exit"
+            WidthRequest="150" />
+
+        <VerticalStackLayout Margin="20,0,0,0" VerticalOptions="Center">
+            <Label
+                Margin="0,0,0,10"
+                FontSize="16"
+                Text="离开模式已启动"
+                TextColor="#999" />
+
+            <Button
+                Margin="0"
+                Padding="0"
+                BackgroundColor="#409EFE"
+                Command="{Binding DetailCommand}"
+                CommandParameter="meeting"
+                CornerRadius="14"
+                FontSize="11"
+                HeightRequest="28"
+                Text="开启分项控制"
+                VerticalOptions="Center" />
+        </VerticalStackLayout>
+    </HorizontalStackLayout>
+</ContentView>

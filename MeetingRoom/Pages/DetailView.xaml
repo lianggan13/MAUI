@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MeetingRoom.Pages.DetailView">
+    <ContentView.Resources>
+        <Style TargetType="RadioButton" x:Key="menuItemStyle">
+            <Setter Property="TextColor" Value="#888"/>
+            <Setter Property="BorderColor" Value="#AAA"/>
+            <Setter Property="ControlTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid BackgroundColor="Transparent" HeightRequest="65">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="24"/>
+                            </Grid.RowDefinitions>
+                            <Ellipse WidthRequest="30" HeightRequest="30" 
+                                     Fill="{TemplateBinding Background}" 
+                                     Stroke="{TemplateBinding BorderColor}"
+                                     StrokeThickness="1"/>
+                            <Label Text="{TemplateBinding Value}" FontFamily="IconFont" 
+                                   VerticalOptions="Center" HorizontalOptions="Center"
+                                   TextColor="{TemplateBinding TextColor}" FontSize="16"/>
+                            <Label Text="{TemplateBinding Content}" Grid.Row="1" 
+                                   VerticalOptions="Start" HorizontalOptions="Center"
+                                   FontSize="9" TextColor="{TemplateBinding BorderColor}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#409EFE"/>
+                    <Setter Property="BorderColor" Value="#409EFE"/>
+                    <Setter Property="TextColor" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="RadioButton" x:Key="CameraButtonStyle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="BorderColor" Value="#CCC"/>
+            <Setter Property="TextColor" Value="#888"/>
+            <Setter Property="HeightRequest" Value="26"/>
+            <Setter Property="WidthRequest" Value="80"/>
+            <Setter Property="ControlTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Rectangle RadiusX="13" RadiusY="13" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderColor}"/>
+                            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                                <Ellipse WidthRequest="6" HeightRequest="6" Stroke="{TemplateBinding BorderColor}" Margin="0,0,3,0" Fill="{TemplateBinding BackgroundColor}"/>
+                                <Label Text="{TemplateBinding Content}" FontSize="10" Margin="3,0,0,0" TextColor="{TemplateBinding TextColor}"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger TargetType="RadioButton" Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#409EFE"/>
+                    <Setter Property="TextColor" Value="White"/>
+                    <Setter Property="BackgroundColor" Value="White"/>
+                    <Setter Property="BorderColor" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        
+        <Style TargetType="Button" x:Key="ButtonStyle1">
+            <Setter Property="WidthRequest" Value="28"/>
+            <Setter Property="HeightRequest" Value="28"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Background" Value="white"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="TextColor" Value="#666"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Style.Triggers>
+                <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#409EFE"/>
+                    <Setter Property="BorderColor" Value="#409EFE"/>
+                    <Setter Property="TextColor" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ButtonStyle2">
+            <Setter Property="WidthRequest" Value="40"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderColor" Value="#BBB"/>
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="TextColor" Value="#999"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Margin" Value="15"/>
+            <Style.Triggers>
+                <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#409EFE"/>
+                    <Setter Property="BorderColor" Value="#409EFE"/>
+                    <Setter Property="TextColor" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Label" x:Key="LightStyle">
+            <Setter Property="TextColor" Value="#CCC"/>
+            <Setter Property="Text" Value="&#xeb66;"/>
+            <Setter Property="FontFamily" Value="IconFont"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+
+        
+    </ContentView.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="2" Fill="#ECF2F7" RadiusX="25" RadiusY="25"/>
+        <Label WidthRequest="1" HorizontalOptions="End">
+            <Label.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="Transparent" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.5"/>
+                    <GradientStop Color="Transparent" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+
+        <CollectionView ItemsSource="{Binding SubMenus}" Margin="0,20">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton IsChecked="{Binding IsSelected}"
+                                 Content="{Binding MenuHeader}"
+                                 Value="{Binding MenuIcon}"
+                                 Style="{StaticResource menuItemStyle}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.Column="1">
+            <!--第一页-->
+            <Grid IsVisible="{Binding SubMenus[0].IsSelected}" Padding="30,1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label HeightRequest="1" Background="#DDD" VerticalOptions="End"/>
+                <HorizontalStackLayout VerticalOptions="Center">
+                    <Label Text="全部窗帘" VerticalOptions="Center" FontSize="11" TextColor="#666" Margin="0,0,20,0" FontAttributes="Bold"/>
+                    <Button Text="开" Style="{StaticResource ButtonStyle1}"/>
+                    <Button Text="停" Style="{StaticResource ButtonStyle1}" Margin="10,0"/>
+                    <Button Text="关" Style="{StaticResource ButtonStyle1}"/>
+                </HorizontalStackLayout>
+
+                <Grid Grid.Row="1" Margin="0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image Source="curtain" WidthRequest="100" />
+                        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                            <Button Text="开" Style="{StaticResource ButtonStyle1}"/>
+                            <Button Text="停" Style="{StaticResource ButtonStyle1}" Margin="10,0"/>
+                            <Button Text="关" Style="{StaticResource ButtonStyle1}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1">
+                        <Image Source="curtain" WidthRequest="100" />
+                        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                            <Button Text="开" Style="{StaticResource ButtonStyle1}"/>
+                            <Button Text="停" Style="{StaticResource ButtonStyle1}" Margin="10,0"/>
+                            <Button Text="关" Style="{StaticResource ButtonStyle1}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1">
+                        <Image Source="curtain" WidthRequest="100" />
+                        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                            <Button Text="开" Style="{StaticResource ButtonStyle1}"/>
+                            <Button Text="停" Style="{StaticResource ButtonStyle1}" Margin="10,0"/>
+                            <Button Text="关" Style="{StaticResource ButtonStyle1}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center"
+                                         Grid.Row="1" Grid.Column="1">
+                        <Image Source="curtain" WidthRequest="100" />
+                        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                            <Button Text="开" Style="{StaticResource ButtonStyle1}"/>
+                            <Button Text="停" Style="{StaticResource ButtonStyle1}" Margin="10,0"/>
+                            <Button Text="关" Style="{StaticResource ButtonStyle1}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+            <!--第二页-->
+            <Grid IsVisible="{Binding SubMenus[1].IsSelected}" Padding="30,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label HeightRequest="1" Background="#DDD" VerticalOptions="End"/>
+                <HorizontalStackLayout VerticalOptions="Center">
+                    <Label Text="投影机" VerticalOptions="Center" FontSize="11" TextColor="#666" Margin="0,0,20,0" FontAttributes="Bold"/>
+                    <Button Text="开" Style="{StaticResource ButtonStyle1}" Margin="0,0,5,0"/>
+                    <Button Text="关" Style="{StaticResource ButtonStyle1}" Margin="5,0,0,0"/>
+                </HorizontalStackLayout>
+
+                <Label Text="投影幕" Grid.Row="1" VerticalOptions="Center" FontSize="11" TextColor="#666" FontAttributes="Bold"/>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="2" Margin="0,0,40,40">
+                    <Image Source="pro" WidthRequest="230" Margin="0,0,60,0"/>
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Button Text="升" Style="{StaticResource ButtonStyle1}"/>
+                        <Button Text="停" Style="{StaticResource ButtonStyle1}" Margin="0,15"/>
+                        <Button Text="降" Style="{StaticResource ButtonStyle1}"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Grid>
+            <!--第三页-->
+            <Grid IsVisible="{Binding SubMenus[2].IsSelected}" Padding="30,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label HeightRequest="1" Background="#DDD" VerticalOptions="End" Grid.ColumnSpan="4"/>
+                <Label Text="电视机控制" VerticalOptions="Center" FontSize="11" TextColor="#666" FontAttributes="Bold"/>
+
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1">
+                    <Image Source="tv" WidthRequest="100" />
+                    <Label Text="电视机1" FontSize="10" TextColor="#888" HorizontalOptions="Center" Margin="0,10" FontAttributes="Bold"/>
+                    <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                        <Button Text="开" Style="{StaticResource ButtonStyle1}" Margin="0,0,10,0"/>
+                        <Button Text="关" Style="{StaticResource ButtonStyle1}" Margin="10,0,0,0"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" Grid.Row="1">
+                    <Image Source="tv" WidthRequest="100" />
+                    <Label Text="电视机2" FontSize="10" TextColor="#888" HorizontalOptions="Center" Margin="0,10" FontAttributes="Bold"/>
+                    <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                        <Button Text="开" Style="{StaticResource ButtonStyle1}" Margin="0,0,10,0"/>
+                        <Button Text="关" Style="{StaticResource ButtonStyle1}" Margin="10,0,0,0"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="2" Grid.Row="1">
+                    <Image Source="tv" WidthRequest="100" />
+                    <Label Text="电视机3" FontSize="10" TextColor="#888" HorizontalOptions="Center" Margin="0,10" FontAttributes="Bold"/>
+                    <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                        <Button Text="开" Style="{StaticResource ButtonStyle1}" Margin="0,0,10,0"/>
+                        <Button Text="关" Style="{StaticResource ButtonStyle1}" Margin="10,0,0,0"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="3" Grid.Row="1">
+                    <Image Source="tv" WidthRequest="100" />
+                    <Label Text="电视机4" FontSize="10" TextColor="#888" HorizontalOptions="Center" Margin="0,10" FontAttributes="Bold"/>
+                    <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10,0,0">
+                        <Button Text="开" Style="{StaticResource ButtonStyle1}" Margin="0,0,10,0"/>
+                        <Button Text="关" Style="{StaticResource ButtonStyle1}" Margin="10,0,0,0"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!--第四页-->
+            <Grid IsVisible="{Binding SubMenus[3].IsSelected}" Padding="30,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label HeightRequest="1" Background="#DDD" VerticalOptions="End"/>
+                <HorizontalStackLayout VerticalOptions="Center">
+                    <Label Text="灯光总控" VerticalOptions="Center" FontSize="11" TextColor="#666" Margin="0,0,20,0" FontAttributes="Bold"/>
+                    <Button Text="开" Style="{StaticResource ButtonStyle1}"/>
+                    <Button Text="关" Style="{StaticResource ButtonStyle1}" Margin="10,0"/>
+                </HorizontalStackLayout>
+
+                <Grid Grid.Row="1" Margin="40">
+                    <Rectangle Fill="white" Stroke="#EEE" StrokeThickness="8" RadiusX="10"/>
+                    <Path Data="M40 0 0 0A40 40 0 0 0 40 40A40 40 0 0 0 0 80L40 80z" 
+                          Stroke="#EEE" StrokeThickness="3" Fill="white" WidthRequest="40" HeightRequest="86"
+                          VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,2,0"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="45">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="1" Style="{StaticResource LightStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding TapCommand}" 
+                                CommandParameter="{Binding Lights[0]}"/>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" 
+                                         Binding="{Binding Lights[0].State}" Value="True">
+                                <Setter Property="TextColor" Value="#409EFE"/>
+                                <Setter Property="Shadow">
+                                    <Setter.Value>
+                                        <Shadow Brush="#409EFE"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Grid.Column="2" Style="{StaticResource LightStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights[1]}"/>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Lights[1].State}" Value="True">
+                                <Setter Property="TextColor" Value="#409EFE"/>
+                                <Setter Property="Shadow">
+                                    <Setter.Value>
+                                        <Shadow Brush="#409EFE"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Grid.Column="3" Style="{StaticResource LightStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights[2]}"/>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Lights[2].State}" Value="True">
+                                <Setter Property="TextColor" Value="#409EFE"/>
+                                <Setter Property="Shadow">
+                                    <Setter.Value>
+                                        <Shadow Brush="#409EFE"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Grid.Column="4" Style="{StaticResource LightStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights[3]}"/>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Lights[3].State}" Value="True">
+                                <Setter Property="TextColor" Value="#409EFE"/>
+                                <Setter Property="Shadow">
+                                    <Setter.Value>
+                                        <Shadow Brush="#409EFE"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Grid.Column="5" Style="{StaticResource LightStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights[4]}"/>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Lights[4].State}" Value="True">
+                                <Setter Property="TextColor" Value="#409EFE"/>
+                                <Setter Property="Shadow">
+                                    <Setter.Value>
+                                        <Shadow Brush="#409EFE"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <Label Grid.Row="1" Style="{StaticResource LightStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights[5]}"/>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Lights[5].State}" Value="True">
+                                <Setter Property="TextColor" Value="#409EFE"/>
+                                <Setter Property="Shadow">
+                                    <Setter.Value>
+                                        <Shadow Brush="#409EFE"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Grid.Row="2" Style="{StaticResource LightStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights[6]}"/>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Lights[6].State}" Value="True">
+                                <Setter Property="TextColor" Value="#409EFE"/>
+                                <Setter Property="Shadow">
+                                    <Setter.Value>
+                                        <Shadow Brush="#409EFE"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Grid.Row="3" Style="{StaticResource LightStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights[7]}"/>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Lights[7].State}" Value="True">
+                                <Setter Property="TextColor" Value="#409EFE"/>
+                                <Setter Property="Shadow">
+                                    <Setter.Value>
+                                        <Shadow Brush="#409EFE"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <Label Grid.Row="4" Grid.Column="1" Style="{StaticResource LightStyle}"/>
+                    <Label Grid.Row="4" Grid.Column="2" Style="{StaticResource LightStyle}"/>
+                    <Label Grid.Row="4" Grid.Column="3" Style="{StaticResource LightStyle}"/>
+                    <Label Grid.Row="4" Grid.Column="4" Style="{StaticResource LightStyle}"/>
+                    <Label Grid.Row="4" Grid.Column="5" Style="{StaticResource LightStyle}"/>
+
+                    <Label Grid.Row="1" Grid.Column="6" Style="{StaticResource LightStyle}"/>
+                    <Label Grid.Row="2" Grid.Column="6" Style="{StaticResource LightStyle}"/>
+                    <Label Grid.Row="3" Grid.Column="6" Style="{StaticResource LightStyle}"/>
+                </Grid>
+
+                <Grid Margin="103" Grid.Row="1">
+                    <Rectangle Stroke="#DDD" StrokeThickness="2"/>
+                    <HorizontalStackLayout HorizontalOptions="Center" Margin="0,25">
+                        <Label WidthRequest="4" Background="#CCC">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights2[0]}"/>
+                            </Label.GestureRecognizers>
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Lights2[0].State}" Value="True">
+                                    <Setter Property="Background" Value="#409EFE"/>
+                                    <Setter Property="Shadow">
+                                        <Setter.Value>
+                                            <Shadow Brush="#409EFE"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Label WidthRequest="4" Margin="40,0" Background="#CCC">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights2[1]}"/>
+                            </Label.GestureRecognizers>
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Lights2[1].State}" Value="True">
+                                    <Setter Property="Background" Value="#409EFE"/>
+                                    <Setter Property="Shadow">
+                                        <Setter.Value>
+                                            <Shadow Brush="#409EFE"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Label WidthRequest="4" Background="#CCC">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights2[2]}"/>
+                            </Label.GestureRecognizers>
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Lights2[2].State}" Value="True">
+                                    <Setter Property="Background" Value="#409EFE"/>
+                                    <Setter Property="Shadow">
+                                        <Setter.Value>
+                                            <Shadow Brush="#409EFE"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Label WidthRequest="4" Margin="40,0" Background="#CCC">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights2[3]}"/>
+                            </Label.GestureRecognizers>
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Lights2[3].State}" Value="True">
+                                    <Setter Property="Background" Value="#409EFE"/>
+                                    <Setter Property="Shadow">
+                                        <Setter.Value>
+                                            <Shadow Brush="#409EFE"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Label WidthRequest="4" Background="#CCC">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding Lights2[4]}"/>
+                            </Label.GestureRecognizers>
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Lights2[4].State}" Value="True">
+                                    <Setter Property="Background" Value="#409EFE"/>
+                                    <Setter Property="Shadow">
+                                        <Setter.Value>
+                                            <Shadow Brush="#409EFE"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </HorizontalStackLayout>
+                </Grid>
+            </Grid>
+
+            <!--第五页-->
+            <Grid IsVisible="{Binding SubMenus[4].IsSelected}" Padding="30,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label HeightRequest="1" Background="#DDD" VerticalOptions="End"/>
+                <HorizontalStackLayout VerticalOptions="Center">
+                    <Label Text="静音" VerticalOptions="Center" FontSize="11" TextColor="#666" Margin="0,0,20,0" FontAttributes="Bold"/>
+                    <Button Text="开" Style="{StaticResource ButtonStyle1}"/>
+                    <Button Text="关" Style="{StaticResource ButtonStyle1}" Margin="10,0"/>
+                </HorizontalStackLayout>
+                <Label Text="总音量" Grid.Row="1" VerticalOptions="Center" FontSize="11" TextColor="#666"/>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="2" Margin="0,0,40,40">
+                    <Image Source="sound" WidthRequest="230" Margin="0,0,60,0"/>
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Button Text="&#xe613;" FontFamily="IconFont" Style="{StaticResource ButtonStyle1}" WidthRequest="35" HeightRequest="35" CornerRadius="17" Background="#FFF" FontSize="16"  Margin="0,0,0,10"/>
+                        <Button Text="&#xe612;" FontFamily="IconFont" Style="{StaticResource ButtonStyle1}" WidthRequest="35" HeightRequest="35" CornerRadius="17" Background="#FFF" FontSize="16" Margin="0,10,0,0"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Grid>
+
+            <!--第六页-->
+            <Grid IsVisible="{Binding SubMenus[5].IsSelected}" Padding="30,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label HeightRequest="1" Background="#DDD" VerticalOptions="End"/>
+                <Label Text="摄像机控制" VerticalOptions="Center" FontSize="11" TextColor="#666" FontAttributes="Bold"/>
+
+                <Grid Grid.Row="1" Margin="0,25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <RadioButton Content="摄像机1" IsChecked="True" Style="{StaticResource CameraButtonStyle}"/>
+                        <RadioButton Content="摄像机2" Grid.Row="1" Style="{StaticResource CameraButtonStyle}"/>
+                        <RadioButton Content="摄像机3" Grid.Row="2" Style="{StaticResource CameraButtonStyle}"/>
+                        <RadioButton Content="摄像机4" Grid.Row="3" Style="{StaticResource CameraButtonStyle}"/>
+                        <RadioButton Content="摄像机5" Grid.Row="4" Style="{StaticResource CameraButtonStyle}"/>
+                        <RadioButton Content="摄像机6" Grid.Row="5" Style="{StaticResource CameraButtonStyle}"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Text="上" Style="{StaticResource ButtonStyle2}" Grid.Column="1"/>
+                        <Button Text="左" Style="{StaticResource ButtonStyle2}" Grid.Row="1"/>
+                        <Button Text="OK" Style="{StaticResource ButtonStyle2}" Grid.Row="1" Grid.Column="1"/>
+                        <Button Text="右" Style="{StaticResource ButtonStyle2}" Grid.Row="1" Grid.Column="2"/>
+                        <Button Text="下" Style="{StaticResource ButtonStyle2}" Grid.Row="2" Grid.Column="1"/>
+                    </Grid>
+
+                    <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Button Text="&#xe63b;" FontSize="16" FontFamily="IconFont" Style="{StaticResource ButtonStyle2}"/>
+                        <Button Text="&#xea98;" FontSize="16" FontFamily="IconFont" Style="{StaticResource ButtonStyle2}"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+        
+    </Grid>
+</ContentView>
